@@ -27,7 +27,6 @@ import {
 import { SheetContextType, SheetProps } from './types';
 import { SheetContext } from './context';
 import { getClosest, inDescendingOrder, validateSnapTo } from './utils';
-import { usePreventScroll } from './use-prevent-scroll';
 import styles from './styles';
 
 const Sheet = React.forwardRef<any, SheetProps>(
@@ -189,10 +188,6 @@ const Sheet = React.forwardRef<any, SheetProps>(
     }));
 
     useModalEffect(isOpen, rootId);
-
-    // Framer Motion should handle body scroll locking but it's not working
-    // properly on iOS. Scroll locking from React Aria seems to work much better.
-    usePreventScroll({ isDisabled: true });
 
     const dragProps = React.useMemo(() => {
       const dragProps: SheetContextType['dragProps'] = {
